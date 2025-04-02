@@ -15,8 +15,8 @@ function App() {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-        <MoviesContainer posters={posters}/>
       </header>
+        <MoviesContainer posters={posters}/>
     </main>
   );
 }

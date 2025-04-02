@@ -1,0 +1,8 @@
+.MoviesContainer {
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 20px;
+}

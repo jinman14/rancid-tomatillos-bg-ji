@@ -2,11 +2,10 @@ import './MoviePoster.css';
 
 function MoviePoster({id, image, title, vote_count}) {
   return (
-    <section className='MoviePoster'>
+    <div className='MoviePoster'>
       <img src = {image}/>
-      <h3>{title}</h3>
-      <p>{vote_count}</p>
-    </section>
+        <h3>{vote_count}</h3>
+    </div>
   );
 }
 
