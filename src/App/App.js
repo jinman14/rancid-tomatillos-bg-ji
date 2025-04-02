@@ -11,13 +11,11 @@ function App() {
 
   const [posters, setPosters] = useState(moviePosters)
 
-
-
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-        <MoviesContainer moviePosters = {moviePosters}/>
+        <MoviesContainer posters={posters}/>
       </header>
     </main>
   );
