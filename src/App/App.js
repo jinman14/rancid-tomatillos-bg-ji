@@ -15,10 +15,12 @@ function App() {
 
   function upvote(){
     // code that says increase vote count
+    console.log('clicked upvote!')
   };
 
   function downvote(){
     //decrease vote count by one
+    console.log('clicked downvote!')
   };
 
 
