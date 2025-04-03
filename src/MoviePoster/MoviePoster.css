@@ -12,9 +12,19 @@
     padding: 9px;
 }
 
-img {
+.MoviePosterImg {
     object-fit: cover;
     width: 270px;
     border-radius: 10px 10px 0px 0px;
 }
 
+.VoteButton {
+    height: 20px;
+    width: 20px;
+}
+
+button {
+    background-color: transparent;
+    border: transparent;
+   
+}
