@@ -43,8 +43,9 @@ function App() {
     setPosters([...posters])
   };
 
-  function displayDetails(id) {
-    setDetails([...details])
+  function displayDetails() {
+    console.log('clicked')
+    setDetails(movieDetails)
     //not sure if i should pass id yet since all moviedetails are the same for now, i think we will need it for fetching real data
   }
   
@@ -52,20 +53,28 @@ function App() {
     setDetails(null)
   }
 
-  return (
-    <main className='App'>
-      <header>
-        <h1>rancid tomatillos</h1>
-      </header>
-        <MoviesContainer posters={posters} 
+  let pageContent
+  if (details !== null && details !== undefined ){
+    pageContent = <MovieDetails details={details} homeIcon={homeIcon} goHome={goHome} />
+  }
+  else {
+    pageContent = (
+      <MoviesContainer posters={posters} 
                           upvote={upvote} 
                           downvote={downvote} 
                           upvoteIcon={upvoteIcon} 
                           downvoteIcon={downvoteIcon} 
                           displayDetails={displayDetails} 
-                          homeIcon={homeIcon} 
-                          details={details}
-                          goHome={goHome}/>
+                          />
+    )
+  }
+
+  return (
+    <main className='App'>
+      <header>
+        <h1>rancid tomatillos</h1>
+      </header>
+        {pageContent}
     </main>
   );
 }
