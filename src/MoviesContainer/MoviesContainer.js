@@ -16,26 +16,13 @@ function Movies({posters, upvote, downvote, upvoteIcon, downvoteIcon, displayDet
         upvoteIcon={upvoteIcon}
         downvoteIcon={downvoteIcon}
         displayDetails={displayDetails}
-        homeIcon={homeIcon}
-        goHome={goHome}
       />
     )
   })
-
-    const movieDetailsContent = null
-    if (details !== null && details !== undefined) {
-      movieDetailsContent = (
-        <MovieDetails
-          details={details}
-          homeIcon={homeIcon}
-          goHome={goHome}
-          />
-      )
-    }
+  
   return (
       <section className='MoviesContainer'>
         {posterData}
-        {movieDetailsContent}
       </section>
   );
 }
