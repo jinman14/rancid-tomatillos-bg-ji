@@ -9,11 +9,12 @@ import { useState, useEffect } from 'react';
 import moviePosters from '../data/movie_posters';
 import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MovieDetails from '../MovieDetails/MovieDetails';
 
 function App() {
 
   const [posters, setPosters] = useState(moviePosters)
-  const [details, setDetails] = useState(movieDetails)
+  const [details, setDetails] = useState(null) 
 
   function upvote(id){
     // code that says increase vote count
@@ -46,14 +47,25 @@ function App() {
     setDetails([...details])
     //not sure if i should pass id yet since all moviedetails are the same for now, i think we will need it for fetching real data
   }
+  
+  function goHome(){
+    setDetails(null)
+  }
 
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
       </header>
-        <MoviesContainer posters={posters} upvote={upvote} downvote={downvote} upvoteIcon={upvoteIcon} downvoteIcon={downvoteIcon}/>
-        <MovieDetails details={details} displayDetails={displayDetails} homeIcon={homeIcon}/>
+        <MoviesContainer posters={posters} 
+                          upvote={upvote} 
+                          downvote={downvote} 
+                          upvoteIcon={upvoteIcon} 
+                          downvoteIcon={downvoteIcon} 
+                          displayDetails={displayDetails} 
+                          homeIcon={homeIcon} 
+                          details={details}
+                          goHome={goHome}/>
     </main>
   );
 }
