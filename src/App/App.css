@@ -18,6 +18,7 @@ h1 {
   color: white;
   font-size: 56px;
   letter-spacing: 5px;
+  display: contents;
 }
 
 p {
@@ -26,3 +27,4 @@ p {
   margin-top: 50px;
   color: white;
 }
+
