@@ -17,10 +17,14 @@ function App() {
   const [details, setDetails] = useState(null) 
 
   useEffect(() => {
+    displayMoviePosters()
+  }, [])
+//check later if we ever need this, refactor to just a useEffect if not
+  function displayMoviePosters() {
     fetch('https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies')
     .then((response) => response.json())
     .then((data) => setPosters(data))
-  }, [])
+  }
 
   function castVote(id, direction){
     // //these will become POST requests
@@ -39,9 +43,14 @@ function App() {
       }
     })
     .then((response) => response.json())
-    .then((data) => console.log(data))
-
-    // setPosters([...posters])
+    .then((data) => { console.log(data)
+      let desiredPoster = posters.find((poster) => {
+        return poster.id === id
+      })
+      desiredPoster.vote_count = data.vote_count
+      setPosters([...posters])})
+    // .then((data) => console.log(data))
+    // .then(displayMoviePosters())
   };
 
   // function downvote(id){
