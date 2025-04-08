@@ -1,6 +1,18 @@
 import './MovieDetails.css';
+// import { useParams } from 'react-router-dom';
 
 function MovieDetails({details, homeIcon, goHome}) {
+  // console.log(details)
+  // const posterId = useParams().id
+  // const details = displayDetails(posterId)
+  if (!details) {
+    return (
+      <section className='MovieDetails'>
+        <div className="loading">Loading movie details...</div>
+      </section>
+    );
+  }
+  
   const backdrop_path = details.backdrop_path
   const genre_ids = details.genre_ids
   const overview = details.overview
