@@ -17,29 +17,18 @@ function App() {
   const [details, setDetails] = useState(null) 
 
   function upvote(id){
-    // code that says increase vote count
-    // find poster by id
-    // get posters vote_count and add one, 
-    // re render
-    // console.log('clicked upvote!', posters)
     let specificPoster = posters.filter((poster) => {
       return poster.id === id
     })
-    // console.log(specificPoster)
     specificPoster[0].vote_count += 1
-    // console.log(specificPoster)
     setPosters([...posters])
   };
 
   function downvote(id){
-    //decrease vote count by one
-    // console.log('clicked downvote!', id)
     let specificPoster = posters.filter((poster) => {
       return poster.id === id
     })
-    // console.log(specificPoster)
     specificPoster[0].vote_count -= 1
-    // console.log(specificPoster)
     setPosters([...posters])
   };
 
@@ -72,11 +61,17 @@ function App() {
   return (
     <main className='App'>
       <header>
-        <h1>rancid tomatillos</h1>
+        <h1>
+          rancid tomatillos
+          {details !== null && details !== undefined && (
+            <button onClick={goHome} className="home-button">
+            <img src={homeIcon} alt="Home Icon" />
+          </button>
+          )}
+        </h1>
       </header>
-        {pageContent}
+      {pageContent}
     </main>
-  );
+  )
 }
-
 export default App;
