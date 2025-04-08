@@ -6,15 +6,21 @@ import homeIcon from '../icons/home.png';
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
-import moviePosters from '../data/movie_posters';
+// import moviePosters from '../data/movie_posters';
 import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
 function App() {
 
-  const [posters, setPosters] = useState(moviePosters)
+  const [posters, setPosters] = useState([])
   const [details, setDetails] = useState(null) 
+
+  useEffect(() => {
+    fetch('https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies')
+    .then((response) => response.json())
+    .then((data) => setPosters(data))
+  })
 
   function upvote(id){
     let specificPoster = posters.filter((poster) => {
