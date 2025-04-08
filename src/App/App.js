@@ -7,7 +7,7 @@ import homeIcon from '../icons/home.png';
 // Example imports (for later):
 import { useState, useEffect } from 'react';
 // import moviePosters from '../data/movie_posters';
-import movieDetails from '../data/movie_details';
+// import movieDetails from '../data/movie_details';
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
@@ -23,12 +23,24 @@ function App() {
   })
 
   function upvote(id){
+    //these will become POST requests
     let specificPoster = posters.filter((poster) => {
       return poster.id === id
     })
     specificPoster[0].vote_count += 1
     setPosters([...posters])
   };
+
+  //SKELETON
+  // fetch('https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/:id', {
+  // method:"POST"},
+  // body: JSON.stringify(someDataToSend),
+  // headers: {
+  // 'Content-Type': 'application/json'
+  //  }
+  // })
+  // .then((response) => response.json())
+  // .then((data) => )
 
   function downvote(id){
     let specificPoster = posters.filter((poster) => {
@@ -38,12 +50,13 @@ function App() {
     setPosters([...posters])
   };
 
-  function displayDetails() {
+  function displayDetails(id) {
     console.log('clicked')
-    setDetails(movieDetails)
-    //not sure if i should pass id yet since all moviedetails are the same for now, i think we will need it for fetching real data
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`)
+    .then((response) => response.json())
+    .then((data) => setDetails(data))
   }
-  
+
   function goHome(){
     setDetails(null)
   }
