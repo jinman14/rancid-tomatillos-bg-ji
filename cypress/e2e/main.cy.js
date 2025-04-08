@@ -25,3 +25,21 @@ describe('Main Page', () => {
     cy.get('.MoviePoster').first().find('button').should('exist')
   })
 })
+
+describe('Movie Details Page', () => {
+  beforeEach(() => {
+    cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
+      statusCode: 200,
+      fixture: "movie_posters" 
+    })
+    cy.visit('http://localhost:3000/')
+  })
+
+  it('displays poster details when the poster image is clicked', () => {
+    cy.get('.MoviePosterImg').first().click()
+    cy.get('.MovieDetailImg').should('exist')
+    cy.get('.home-button').should('exist')
+    cy.get('h2').should('have.text', ' The Dark Knight ')
+    cy.get('h3').should('have.text', ' Drama, Action, Crime, Thriller ')
+  })
+})
