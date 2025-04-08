@@ -20,35 +20,37 @@ function App() {
     fetch('https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies')
     .then((response) => response.json())
     .then((data) => setPosters(data))
-  })
+  }, [])
 
-  function upvote(id){
-    //these will become POST requests
-    let specificPoster = posters.filter((poster) => {
-      return poster.id === id
+  function castVote(id, direction){
+    // //these will become POST requests
+    // let specificPoster = posters.filter((poster) => {
+    //   return poster.id === id
+    // })
+    // let updatedVoteCount = specificPoster[0].vote_count += 1
+    // // console.log(updatedVoteCount)
+    // let updatedPoster = { "vote_count": updatedVoteCount }
+    // // setPosters([...posters])
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`, {
+    method:"PATCH",
+    body: JSON.stringify({ vote_direction: direction }),
+    headers: {
+    'Content-Type': 'application/json'
+      }
     })
-    specificPoster[0].vote_count += 1
-    setPosters([...posters])
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+
+    // setPosters([...posters])
   };
 
-  //SKELETON
-  // fetch('https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/:id', {
-  // method:"POST"},
-  // body: JSON.stringify(someDataToSend),
-  // headers: {
-  // 'Content-Type': 'application/json'
-  //  }
-  // })
-  // .then((response) => response.json())
-  // .then((data) => )
-
-  function downvote(id){
-    let specificPoster = posters.filter((poster) => {
-      return poster.id === id
-    })
-    specificPoster[0].vote_count -= 1
-    setPosters([...posters])
-  };
+  // function downvote(id){
+  //   let specificPoster = posters.filter((poster) => {
+  //     return poster.id === id
+  //   })
+  //   specificPoster[0].vote_count -= 1
+  //   setPosters([...posters])
+  // };
 
   function displayDetails(id) {
     console.log('clicked')
@@ -68,8 +70,8 @@ function App() {
   else {
     pageContent = (
       <MoviesContainer posters={posters} 
-                          upvote={upvote} 
-                          downvote={downvote} 
+                          castVote={castVote} 
+                          // downvote={downvote} 
                           upvoteIcon={upvoteIcon} 
                           downvoteIcon={downvoteIcon} 
                           displayDetails={displayDetails} 
