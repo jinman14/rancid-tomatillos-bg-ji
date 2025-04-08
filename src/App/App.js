@@ -3,7 +3,7 @@ import searchIcon from '../icons/search.png';
 import upvoteIcon from '../icons/upvote.png';
 import downvoteIcon from '../icons/downvote.png';
 import homeIcon from '../icons/home.png';
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
@@ -16,6 +16,7 @@ function App() {
 
   const [posters, setPosters] = useState([])
   const [details, setDetails] = useState(null) 
+  const navigate = useNavigate();
 
   useEffect(() => {
     displayMoviePosters()
@@ -71,23 +72,24 @@ function App() {
 
   function goHome(){
     setDetails(null)
+    navigate('/')
   }
 
-  // let pageContent
-  // if (details !== null && details !== undefined ){
-  //   pageContent = <MovieDetails details={details} homeIcon={homeIcon} goHome={goHome} />
-  // }
-  // else {
-  //   pageContent = (
-  //     <MoviesContainer posters={posters} 
-  //                         castVote={castVote} 
-  //                         // downvote={downvote} 
-  //                         upvoteIcon={upvoteIcon} 
-  //                         downvoteIcon={downvoteIcon} 
-  //                         displayDetails={displayDetails} 
-  //                         />
-  //   )
-  // }
+  let pageContent
+  if (details !== null && details !== undefined ){
+    pageContent = <MovieDetails details={details} homeIcon={homeIcon} goHome={goHome} />
+  }
+  else {
+    pageContent = (
+      <MoviesContainer posters={posters} 
+                          castVote={castVote} 
+                          // downvote={downvote} 
+                          upvoteIcon={upvoteIcon} 
+                          downvoteIcon={downvoteIcon} 
+                          displayDetails={displayDetails} 
+                          />
+    )
+  }
 
   return (
     <main className='App'>
