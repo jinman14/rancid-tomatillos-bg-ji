@@ -6,7 +6,7 @@ function MovieDetails({details, homeIcon, goHome}) {
   const overview = details.overview
   const title = details.title
 
-  const genres = genre_ids.join(', ');
+  const genres = genre_ids?.join(', ');
 
   return (
     <section className='MovieDetails'>
