@@ -2,8 +2,8 @@ import './App.css';
 // import searchIcon from '../icons/search.png';
 import upvoteIcon from '../icons/upvote.png';
 import downvoteIcon from '../icons/downvote.png';
-// import homeIcon from '../icons/home.png';
-import { Routes, Route } from 'react-router-dom'
+import homeIcon from '../icons/home.png';
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
@@ -16,8 +16,15 @@ function App() {
 
   const [posters, setPosters] = useState([])
   const [details, setDetails] = useState(null) 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  function goHome(){
+    navigate('/')
+  }
+  
+  const showHomeIcon = location.pathname !== '/';
+  
   useEffect(() => {
     displayMoviePosters()
   }, [])
@@ -51,18 +58,18 @@ function App() {
       })
       desiredPoster.vote_count = data.vote_count
       setPosters([...posters])})
-    // .then((data) => console.log(data))
-    // .then(displayMoviePosters())
-  };
-
-  // function downvote(id){
-  //   let specificPoster = posters.filter((poster) => {
-  //     return poster.id === id
-  //   })
-  //   specificPoster[0].vote_count -= 1
-  //   setPosters([...posters])
-  // };
-
+      // .then((data) => console.log(data))
+      // .then(displayMoviePosters())
+    };
+    
+    // function downvote(id){
+      //   let specificPoster = posters.filter((poster) => {
+        //     return poster.id === id
+        //   })
+        //   specificPoster[0].vote_count -= 1
+        //   setPosters([...posters])
+        // };
+        
 
   // let pageContent
   // if (details !== null && details !== undefined ){
@@ -85,11 +92,11 @@ function App() {
       <header>
         <h1>
           rancid tomatillos
-          {/* {details !== null && details !== undefined && (
+          {showHomeIcon && (
             <button onClick={goHome} className="home-button">
             <img src={homeIcon} alt="Home Icon" />
           </button>
-          )} */}
+          )}
         </h1>
       </header>
       <Routes>

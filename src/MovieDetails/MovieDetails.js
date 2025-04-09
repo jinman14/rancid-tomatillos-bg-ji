@@ -1,4 +1,5 @@
 import './MovieDetails.css';
+import homeIcon from '../icons/home.png';
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
