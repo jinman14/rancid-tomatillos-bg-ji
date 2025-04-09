@@ -1,16 +1,35 @@
 import './MovieDetails.css';
-// import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-function MovieDetails({details, homeIcon, goHome}) {
+function MovieDetails() {
+
+    const [details, setDetails] = useState(null) 
+    const navigate = useNavigate();
   // console.log(details)
-  // const posterId = useParams().id
+    const posterId = useParams().id
   // const details = displayDetails(posterId)
+  useEffect(() => {
+      displayDetails(posterId)
+    }, [])
+
+  function displayDetails(id) {
+    console.log('clicked')
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`)
+    .then((response) => response.json())
+    .then((data) => { console.log(data); setDetails(data) })
+  }
+
   if (!details) {
     return (
       <section className='MovieDetails'>
         <div className="loading">Loading movie details...</div>
       </section>
     );
+  }
+
+  function goHome(){
+    navigate('/')
   }
   
   const backdrop_path = details.backdrop_path

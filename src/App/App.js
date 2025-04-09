@@ -1,9 +1,9 @@
 import './App.css';
-import searchIcon from '../icons/search.png';
+// import searchIcon from '../icons/search.png';
 import upvoteIcon from '../icons/upvote.png';
 import downvoteIcon from '../icons/downvote.png';
-import homeIcon from '../icons/home.png';
-import { Routes, Route, useNavigate } from 'react-router-dom'
+// import homeIcon from '../icons/home.png';
+import { Routes, Route } from 'react-router-dom'
 
 // Example imports (for later):
 import { useState, useEffect } from 'react';
@@ -16,7 +16,7 @@ function App() {
 
   const [posters, setPosters] = useState([])
   const [details, setDetails] = useState(null) 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     displayMoviePosters()
@@ -63,44 +63,33 @@ function App() {
   //   setPosters([...posters])
   // };
 
-  function displayDetails(id) {
-    console.log('clicked')
-    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`)
-    .then((response) => response.json())
-    .then((data) => { console.log(data); setDetails(data) })
-  }
 
-  function goHome(){
-    setDetails(null)
-    navigate('/')
-  }
-
-  let pageContent
-  if (details !== null && details !== undefined ){
-    pageContent = <MovieDetails details={details} homeIcon={homeIcon} goHome={goHome} />
-  }
-  else {
-    pageContent = (
-      <MoviesContainer posters={posters} 
-                          castVote={castVote} 
-                          // downvote={downvote} 
-                          upvoteIcon={upvoteIcon} 
-                          downvoteIcon={downvoteIcon} 
-                          displayDetails={displayDetails} 
-                          />
-    )
-  }
+  // let pageContent
+  // if (details !== null && details !== undefined ){
+  //   pageContent = <MovieDetails details={details} homeIcon={homeIcon} goHome={goHome} />
+  // }
+  // else {
+  //   pageContent = (
+  //     <MoviesContainer posters={posters} 
+  //                         castVote={castVote} 
+  //                         // downvote={downvote} 
+  //                         upvoteIcon={upvoteIcon} 
+  //                         downvoteIcon={downvoteIcon} 
+  //                         displayDetails={displayDetails} 
+  //                         />
+  //   )
+  // }
 
   return (
     <main className='App'>
       <header>
         <h1>
           rancid tomatillos
-          {details !== null && details !== undefined && (
+          {/* {details !== null && details !== undefined && (
             <button onClick={goHome} className="home-button">
             <img src={homeIcon} alt="Home Icon" />
           </button>
-          )}
+          )} */}
         </h1>
       </header>
       <Routes>
@@ -109,9 +98,9 @@ function App() {
                             // downvote={downvote} 
                             upvoteIcon={upvoteIcon} 
                             downvoteIcon={downvoteIcon} 
-                            displayDetails={displayDetails} 
+                            // displayDetails={displayDetails} 
                             />} />
-        <Route path="/:id" element={ <MovieDetails details={details} homeIcon={homeIcon} goHome={goHome} />} />
+        <Route path="/:id" element={ <MovieDetails />} />
       </Routes>
     </main>
   )
