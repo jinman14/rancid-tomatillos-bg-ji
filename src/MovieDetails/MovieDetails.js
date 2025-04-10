@@ -44,7 +44,7 @@ function MovieDetails() {
   return (
     <section className='MovieDetails'>
       <div className='MovieBackdrop'>
-        <img className = "MovieDetailImg" src={backdrop_path} />
+        <img className = "MovieDetailImg" src={backdrop_path} alt = {title}/>
       <h2> {title} </h2>
       <h3> {genres} </h3>
       <p> {overview} </p>
