@@ -37,7 +37,7 @@ describe('Main Page', () => {
       }
     })
     cy.get('.MoviePoster').first().get('.UpVoteButton').first().click()
-    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32545')
+    cy.get('.MoviePoster').first().find('h3').should('have.text', '32545')
 
     cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
       statusCode: 200,
@@ -45,7 +45,7 @@ describe('Main Page', () => {
     })
     cy.visit('http://localhost:3000/')
     cy.reload()
-    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32545')
+    cy.get('.MoviePoster').first().find('h3').should('have.text', '32545')
   })
 
   it('decreases vote count when clicked and persists on refresh', () => {
@@ -64,14 +64,14 @@ describe('Main Page', () => {
       }
     })
     cy.get('.MoviePoster').first().get('.DownVoteButton').first().click()
-    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32544')
+    cy.get('.MoviePoster').first().find('h3').should('have.text', '32544')
     cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
       statusCode: 200,
       fixture: "downvoted_movie_posters" 
     })
     cy.visit('http://localhost:3000/')
     cy.reload()
-    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32544')
+    cy.get('.MoviePoster').first().find('h3').should('have.text', '32544')
   })
 })
 
@@ -110,5 +110,18 @@ describe('Movie Details Page', () => {
     cy.get('.MoviePoster').should('have.length', 4)
     cy.get('.MoviePoster').first().find('button').should('exist')
   })
+
+  describe('Sad path', () => (
+   
+    it('displays all the movie posters on page load', () => {
+      cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
+        statusCode: 400
+      })
+      cy.visit('http://localhost:3000/')
+  
+      cy.get('.MoviesContainer').should('exist')
+      cy.get('div').should('have.text', "rancid tomatillosFailed to execute 'json' on 'Response': Unexpected end of JSON inputFailed to execute 'json' on 'Response': Unexpected end of JSON input")
+    })
+  ))
 })
 
