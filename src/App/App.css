@@ -33,3 +33,9 @@ p {
   text-align: center;
   margin: 1rem;
 }
+
+.home-button:hover {
+  border-radius: 100px;
+  background-color: rgba(152, 250, 255, 0.5);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+}

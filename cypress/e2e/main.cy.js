@@ -6,16 +6,6 @@ describe('Main Page', () => {
       fixture: "movie_posters" 
     })
     cy.visit('http://localhost:3000/')
-
-    cy.intercept('GET', "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/155", {
-      statusCode: 201,
-      body: {
-        "id": 155,
-        "poster_path": "https://image.tmdb.org/t/p/original//qJ2tW6WMUDux911r6m7haRef0WH.jpg",
-        "title": "The Dark Knight",
-        "vote_count": 32544
-      },
-    })
   })
 
   it('displays title on page load', () => {
