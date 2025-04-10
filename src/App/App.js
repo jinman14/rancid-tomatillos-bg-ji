@@ -1,5 +1,5 @@
 import './App.css';
-import searchIcon from '../icons/search.png';
+// import searchIcon from '../icons/search.png';
 import upvoteIcon from '../icons/upvote.png';
 import downvoteIcon from '../icons/downvote.png';
 import homeIcon from '../icons/home.png';
