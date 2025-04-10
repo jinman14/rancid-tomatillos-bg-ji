@@ -2,7 +2,7 @@ import './MoviesContainer.css';
 import MoviePoster from '../MoviePoster/MoviePoster';
 import MovieDetails from '../MovieDetails/MovieDetails';
 
-function Movies({posters, castVote, upvoteIcon, downvoteIcon, displayDetails, homeIcon, details, goHome}) {
+function Movies({posters, castVote, upvoteIcon, downvoteIcon, playHoverSound}) {
   const posterData = posters.map(poster => {
     return (
       <MoviePoster
@@ -15,7 +15,8 @@ function Movies({posters, castVote, upvoteIcon, downvoteIcon, displayDetails, ho
         // downvote={downvote}
         upvoteIcon={upvoteIcon}
         downvoteIcon={downvoteIcon}
-        displayDetails={displayDetails}
+        // displayDetails={displayDetails}
+        playHoverSound={playHoverSound}
       />
     )
   })
