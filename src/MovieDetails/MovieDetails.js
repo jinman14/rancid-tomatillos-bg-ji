@@ -1,15 +1,12 @@
 import './MovieDetails.css';
-// import homeIcon from '../icons/home.png';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 function MovieDetails() {
 
   const [details, setDetails] = useState(null) 
-    // const navigate = useNavigate();
-  // console.log(details)
   const posterId = useParams().id
-  // const details = displayDetails(posterId)
+
   useEffect(() => {
       displayDetails(posterId)
     }, [])
@@ -30,10 +27,6 @@ function MovieDetails() {
     );
   }
 
-  // function goHome(){
-  //   navigate('/')
-  // }
-  
   const backdrop_path = details.backdrop_path
   const genre_ids = details.genre_ids
   const overview = details.overview
