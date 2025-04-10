@@ -19,6 +19,7 @@ function MovieDetails() {
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`)
     .then((response) => response.json())
     .then((data) => { console.log(data); setDetails(data) })
+    .catch((err) => console.log("Error:", err))
   }
 
   if (!details) {

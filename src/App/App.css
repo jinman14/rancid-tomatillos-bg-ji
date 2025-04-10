@@ -28,3 +28,8 @@ p {
   color: white;
 }
 
+.error-message {
+  color: red;
+  text-align: center;
+  margin: 1rem;
+}
