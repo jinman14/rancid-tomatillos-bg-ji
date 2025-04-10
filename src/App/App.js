@@ -17,11 +17,12 @@ import MovieDetails from '../MovieDetails/MovieDetails';
 function App() {
 
   const [posters, setPosters] = useState([])
-  const [details, setDetails] = useState(null) 
+  // const [details, setDetails] = useState(null) 
   const [error, setError] = useState(null)
   const [soundOn, setSoundOn] = useState(false)
   const navigate = useNavigate();
   const location = useLocation();
+
   const ding = new Audio(dingSound)
   ding.volume = 0.2
   const hover = new Audio(hoverSound)
