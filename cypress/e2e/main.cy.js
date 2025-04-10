@@ -1,7 +1,4 @@
 
-import posters from '../fixtures/movie_posters.json' 
-import details from '../fixtures/movie_details.json' 
-
 describe('Main Page', () => {
   beforeEach(() => {
     cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
@@ -17,20 +14,6 @@ describe('Main Page', () => {
         "poster_path": "https://image.tmdb.org/t/p/original//qJ2tW6WMUDux911r6m7haRef0WH.jpg",
         "title": "The Dark Knight",
         "vote_count": 32544
-      },
-    })
-
-    cy.intercept('PATCH', "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/155", {
-      statusCode: 201,
-      body: {
-        vote_direction: "up"
-      },
-    })
-
-    cy.intercept('PATCH', "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/155", {
-      statusCode: 201,
-      body: {
-        vote_direction: "down"
       },
     })
   })
@@ -53,16 +36,53 @@ describe('Main Page', () => {
     cy.get('.MoviePoster').first().find('button').should('exist')
   })
 
-  it('increases vote count for specific movie when upVote icon is clicked', () => {
-    cy.get('.MoviePoster').first('.UpVoteButton').click()
-    // cy.get('h3').should('exist')
+  it('increases vote count when clicked and persists on refresh', () => {
+    cy.intercept('PATCH', "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/155", {
+      statusCode: 201,
+      body: {
+        id: 155,
+        poster_path: "https://image.tmdb.org/t/p/original//qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        title: "The Dark Knight",
+        vote_count: 32545
+      }
+    })
+    cy.get('.MoviePoster').first().get('.UpVoteButton').first().click()
+    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32545')
+
+    cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
+      statusCode: 200,
+      fixture: "upvoted_movie_posters" 
+    })
+    cy.visit('http://localhost:3000/')
+    cy.reload()
+    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32545')
   })
 
-  it('decreases vote count for specific movie when downVote icon is clicked', () => {
-    cy.get('.DownVoteButton').first().click()
-    // cy.get('.MoviePoster').first().should('have'.vote_count, 32543)
+  it('decreases vote count when clicked and persists on refresh', () => {
+    cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
+      statusCode: 200,
+      fixture: "upvoted_movie_posters" 
+    })
+
+    cy.intercept('PATCH', "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/155", {
+      statusCode: 201,
+      body: {
+        id: 155,
+        poster_path: "https://image.tmdb.org/t/p/original//qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        title: "The Dark Knight",
+        vote_count: 32544
+      }
+    })
+    cy.get('.MoviePoster').first().get('.DownVoteButton').first().click()
+    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32544')
+    cy.intercept("GET", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies", {
+      statusCode: 200,
+      fixture: "downvoted_movie_posters" 
+    })
+    cy.visit('http://localhost:3000/')
+    cy.reload()
+    cy.get('.MoviePoster').first().find('h3').should('have.text', ' 32544')
   })
-  
 })
 
 describe('Movie Details Page', () => {
@@ -101,4 +121,4 @@ describe('Movie Details Page', () => {
     cy.get('.MoviePoster').first().find('button').should('exist')
   })
 })
-//add testing so when page refreshes vote count is the same
+
